@@ -89,3 +89,22 @@ export interface PlayerStats {
     average: number;
     wickets: number;
 }
+
+export interface MatchScorecardView {
+    match_id: string;
+    team_name: string;
+    team_logo?: string;
+    player_id: string;
+    player_name: string;
+    avatar_url?: string;
+    player_role: string;
+    runs_scored: number;
+    balls_faced: number;
+    is_out: boolean;
+    batting_sr: number;
+    wickets_taken: number;
+    runs_conceded: number;
+    balls_bowled: number;
+    overs_bowled: string;
+    bowling_eco: number;
+}

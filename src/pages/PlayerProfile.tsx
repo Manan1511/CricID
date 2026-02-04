@@ -59,6 +59,7 @@ export default function PlayerProfile() {
                 runs_conceded,
                 is_out,
                 matches (
+                    id,
                     date,
                     tournament_name,
                     venue
@@ -246,7 +247,9 @@ export default function PlayerProfile() {
                                                         {new Date(perf.matches?.date).toLocaleDateString()}
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                        <div className="font-medium">{perf.matches?.tournament_name || 'Friendly'}</div>
+                                                        <Link to={`/match/${perf.matches?.id}`} className="font-medium hover:text-blue-600 hover:underline">
+                                                            {perf.matches?.tournament_name || 'Friendly'}
+                                                        </Link>
                                                         <div className="text-xs text-gray-500">{perf.matches?.venue}</div>
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-semibold">
