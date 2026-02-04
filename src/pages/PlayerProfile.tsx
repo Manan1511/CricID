@@ -113,20 +113,20 @@ export default function PlayerProfile() {
     }
 
     return (
-        <div className="bg-gray-50 min-h-screen pb-12">
+        <div className="bg-[#E3EDF7] min-h-screen pb-12">
             {/* Header / Banner */}
-            <div className="bg-white shadow">
+            <div className="bg-[#E3EDF7] shadow-neu-flat mb-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     <div className="md:flex md:items-center md:justify-between">
                         <div className="flex items-center">
                             <img
-                                className="h-24 w-24 rounded-full bg-gray-100 object-cover border-4 border-white shadow-sm"
+                                className="h-24 w-24 rounded-full bg-[#E3EDF7] object-cover border-4 border-[#E3EDF7] shadow-neu-flat"
                                 src={profile.avatar_url || `https://ui-avatars.com/api/?name=${profile.full_name}&background=random&size=128`}
                                 alt={profile.full_name}
                             />
                             <div className="ml-6">
-                                <h1 className="text-3xl font-bold text-gray-900">{profile.full_name}</h1>
-                                <div className="flex items-center mt-2 text-gray-500 text-sm">
+                                <h1 className="text-3xl font-extrabold text-gray-700 drop-shadow-sm">{profile.full_name}</h1>
+                                <div className="flex items-center mt-2 text-gray-500 text-sm font-medium">
                                     <span className="flex items-center mr-4">
                                         <Shield className="flex-shrink-0 mr-1.5 h-4 w-4 text-blue-500" />
                                         {profile.cric_id}
@@ -136,7 +136,7 @@ export default function PlayerProfile() {
                                         {profile.team_name} {profile.team_city ? `(${profile.team_city})` : ''}
                                     </span>
                                     {profile.is_verified && (
-                                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                        <span className="px-2 inline-flex text-xs leading-5 font-bold rounded-full bg-[#E3EDF7] text-green-700 shadow-neu-pressed">
                                             Verified
                                         </span>
                                     )}
@@ -152,32 +152,32 @@ export default function PlayerProfile() {
 
                     {/* Left Column: Personal Info */}
                     <div className="space-y-6">
-                        <div className="bg-white shadow rounded-lg p-6">
-                            <h3 className="text-lg font-medium text-gray-900 border-b pb-2 mb-4">Personal Details</h3>
+                        <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl p-6">
+                            <h3 className="text-lg font-bold text-gray-700 border-b border-gray-200/50 pb-2 mb-4">Personal Details</h3>
                             <dl className="space-y-4">
                                 <div>
-                                    <dt className="text-sm font-medium text-gray-500 flex items-center">
+                                    <dt className="text-sm font-bold text-gray-500 flex items-center mb-1">
                                         <Calendar className="h-4 w-4 mr-2" /> Date of Birth
                                     </dt>
-                                    <dd className="mt-1 text-sm text-gray-900">{profile.date_of_birth || 'N/A'}</dd>
+                                    <dd className="ml-6 mt-1 text-sm font-medium text-gray-700 bg-[#E3EDF7] shadow-neu-pressed rounded-lg p-2 inline-block min-w-[100px]">{profile.date_of_birth || 'N/A'}</dd>
                                 </div>
                                 <div>
-                                    <dt className="text-sm font-medium text-gray-500 flex items-center">
+                                    <dt className="text-sm font-bold text-gray-500 flex items-center mb-1">
                                         <User className="h-4 w-4 mr-2" /> Role
                                     </dt>
-                                    <dd className="mt-1 text-sm text-gray-900">{profile.playing_role || profile.role}</dd>
+                                    <dd className="ml-6 mt-1 text-sm font-medium text-gray-700 bg-[#E3EDF7] shadow-neu-pressed rounded-lg p-2 inline-block">{profile.playing_role || profile.role}</dd>
                                 </div>
                                 <div>
-                                    <dt className="text-sm font-medium text-gray-500 flex items-center">
+                                    <dt className="text-sm font-bold text-gray-500 flex items-center mb-1">
                                         <Activity className="h-4 w-4 mr-2" /> Batting Style
                                     </dt>
-                                    <dd className="mt-1 text-sm text-gray-900">{profile.batting_style || 'Not Specified'}</dd>
+                                    <dd className="ml-6 mt-1 text-sm font-medium text-gray-700 bg-[#E3EDF7] shadow-neu-pressed rounded-lg p-2 inline-block">{profile.batting_style || 'Not Specified'}</dd>
                                 </div>
                                 <div>
-                                    <dt className="text-sm font-medium text-gray-500 flex items-center">
+                                    <dt className="text-sm font-bold text-gray-500 flex items-center mb-1">
                                         <Activity className="h-4 w-4 mr-2" /> Bowling Style
                                     </dt>
-                                    <dd className="mt-1 text-sm text-gray-900">{profile.bowling_style || 'Not Specified'}</dd>
+                                    <dd className="ml-6 mt-1 text-sm font-medium text-gray-700 bg-[#E3EDF7] shadow-neu-pressed rounded-lg p-2 inline-block">{profile.bowling_style || 'Not Specified'}</dd>
                                 </div>
                             </dl>
                         </div>
@@ -186,68 +186,68 @@ export default function PlayerProfile() {
                     {/* Right Column: Stats & Performance */}
                     <div className="lg:col-span-2 space-y-6">
                         {/* Key Stats Cards */}
-                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                            <div className="bg-white overflow-hidden shadow rounded-lg p-5 text-center">
-                                <dt className="text-sm font-medium text-gray-500 truncate">Total Runs</dt>
-                                <dd className="mt-1 text-3xl font-semibold text-gray-900">{profile.stats?.total_runs || 0}</dd>
+                        <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+                            <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl p-5 text-center group hover:shadow-neu-pressed transition-all duration-300">
+                                <dt className="text-xs font-bold text-gray-500 uppercase tracking-wider">Total Runs</dt>
+                                <dd className="mt-2 text-3xl font-extrabold text-blue-600 drop-shadow-sm">{profile.stats?.total_runs || 0}</dd>
                             </div>
-                            <div className="bg-white overflow-hidden shadow rounded-lg p-5 text-center">
-                                <dt className="text-sm font-medium text-gray-500 truncate">Batting Avg</dt>
-                                <dd className="mt-1 text-3xl font-semibold text-gray-900">{Number(profile.stats?.batting_avg || 0).toFixed(2)}</dd>
+                            <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl p-5 text-center group hover:shadow-neu-pressed transition-all duration-300">
+                                <dt className="text-xs font-bold text-gray-500 uppercase tracking-wider">Batting Avg</dt>
+                                <dd className="mt-2 text-3xl font-extrabold text-gray-700">{Number(profile.stats?.batting_avg || 0).toFixed(2)}</dd>
                             </div>
-                            <div className="bg-white overflow-hidden shadow rounded-lg p-5 text-center">
-                                <dt className="text-sm font-medium text-gray-500 truncate">Strike Rate</dt>
-                                <dd className="mt-1 text-3xl font-semibold text-gray-900">{Number(profile.stats?.batting_strike_rate || 0).toFixed(2)}</dd>
+                            <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl p-5 text-center group hover:shadow-neu-pressed transition-all duration-300">
+                                <dt className="text-xs font-bold text-gray-500 uppercase tracking-wider">Strike Rate</dt>
+                                <dd className="mt-2 text-3xl font-extrabold text-gray-700">{Number(profile.stats?.batting_strike_rate || 0).toFixed(2)}</dd>
                             </div>
-                            <div className="bg-white overflow-hidden shadow rounded-lg p-5 text-center">
-                                <dt className="text-sm font-medium text-gray-500 truncate">High Score</dt>
-                                <dd className="mt-1 text-3xl font-semibold text-gray-900">{profile.stats?.high_score || 0}</dd>
+                            <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl p-5 text-center group hover:shadow-neu-pressed transition-all duration-300">
+                                <dt className="text-xs font-bold text-gray-500 uppercase tracking-wider">High Score</dt>
+                                <dd className="mt-2 text-3xl font-extrabold text-gray-700">{profile.stats?.high_score || 0}</dd>
                             </div>
 
-                            <div className="bg-white overflow-hidden shadow rounded-lg p-5 text-center">
-                                <dt className="text-sm font-medium text-gray-500 truncate">Wickets</dt>
-                                <dd className="mt-1 text-3xl font-semibold text-gray-900">{profile.stats?.total_wickets || 0}</dd>
+                            <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl p-5 text-center group hover:shadow-neu-pressed transition-all duration-300">
+                                <dt className="text-xs font-bold text-gray-500 uppercase tracking-wider">Wickets</dt>
+                                <dd className="mt-2 text-3xl font-extrabold text-blue-600 drop-shadow-sm">{profile.stats?.total_wickets || 0}</dd>
                             </div>
-                            <div className="bg-white overflow-hidden shadow rounded-lg p-5 text-center">
-                                <dt className="text-sm font-medium text-gray-500 truncate">Economy</dt>
-                                <dd className="mt-1 text-3xl font-semibold text-gray-900">{Number(profile.stats?.bowling_economy_rate || 0).toFixed(2)}</dd>
+                            <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl p-5 text-center group hover:shadow-neu-pressed transition-all duration-300">
+                                <dt className="text-xs font-bold text-gray-500 uppercase tracking-wider">Economy</dt>
+                                <dd className="mt-2 text-3xl font-extrabold text-gray-700">{Number(profile.stats?.bowling_economy_rate || 0).toFixed(2)}</dd>
                             </div>
-                            <div className="bg-white overflow-hidden shadow rounded-lg p-5 text-center">
-                                <dt className="text-sm font-medium text-gray-500 truncate">Bowling Avg</dt>
-                                <dd className="mt-1 text-3xl font-semibold text-gray-900">{Number(profile.stats?.bowling_avg || 0).toFixed(2)}</dd>
+                            <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl p-5 text-center group hover:shadow-neu-pressed transition-all duration-300">
+                                <dt className="text-xs font-bold text-gray-500 uppercase tracking-wider">Bowling Avg</dt>
+                                <dd className="mt-2 text-3xl font-extrabold text-gray-700">{Number(profile.stats?.bowling_avg || 0).toFixed(2)}</dd>
                             </div>
-                            <div className="bg-white overflow-hidden shadow rounded-lg p-5 text-center">
-                                <dt className="text-sm font-medium text-gray-500 truncate">Matches</dt>
-                                <dd className="mt-1 text-3xl font-semibold text-gray-900">{profile.stats?.matches_played || 0}</dd>
+                            <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl p-5 text-center group hover:shadow-neu-pressed transition-all duration-300">
+                                <dt className="text-xs font-bold text-gray-500 uppercase tracking-wider">Matches</dt>
+                                <dd className="mt-2 text-3xl font-extrabold text-gray-700">{profile.stats?.matches_played || 0}</dd>
                             </div>
                         </div>
 
                         {/* Recent Matches */}
-                        <div className="bg-white shadow rounded-lg overflow-hidden">
-                            <div className="px-4 py-5 sm:px-6 border-b border-gray-200">
-                                <h3 className="text-lg leading-6 font-medium text-gray-900 flex items-center">
-                                    <Trophy className="h-5 w-5 mr-2 text-yellow-500" /> Recent Performances
+                        <div className="bg-[#E3EDF7] shadow-neu-flat rounded-2xl overflow-hidden">
+                            <div className="px-6 py-5 border-b border-gray-200/50">
+                                <h3 className="text-lg leading-6 font-bold text-gray-700 flex items-center">
+                                    <Trophy className="h-5 w-5 mr-2 text-yellow-600 drop-shadow-sm" /> Recent Performances
                                 </h3>
                             </div>
                             <div className="overflow-x-auto">
-                                <table className="min-w-full divide-y divide-gray-200">
-                                    <thead className="bg-gray-50">
+                                <table className="min-w-full divide-y divide-gray-200/50">
+                                    <thead className="bg-[#E3EDF7]">
                                         <tr>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Match/Venue</th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Runs</th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Wickets</th>
+                                            <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Date</th>
+                                            <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Match/Venue</th>
+                                            <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Runs</th>
+                                            <th className="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Wickets</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="bg-white divide-y divide-gray-200">
+                                    <tbody className="divide-y divide-gray-200/50 bg-[#E3EDF7]">
                                         {profile.recent_matches && profile.recent_matches.length > 0 ? (
                                             profile.recent_matches.map((perf: any, idx: number) => (
-                                                <tr key={idx}>
+                                                <tr key={idx} className="hover:bg-gray-100/50 transition-colors">
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                         {new Date(perf.matches?.date).toLocaleDateString()}
                                                     </td>
                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                        <Link to={`/match/${perf.matches?.id}`} className="font-medium hover:text-blue-600 hover:underline">
+                                                        <Link to={`/match/${perf.matches?.id}`} className="font-bold hover:text-blue-600 hover:underline">
                                                             {perf.matches?.tournament_name || 'Friendly'}
                                                         </Link>
                                                         <div className="text-xs text-gray-500">{perf.matches?.venue}</div>

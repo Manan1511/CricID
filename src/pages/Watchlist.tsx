@@ -96,37 +96,39 @@ export default function Watchlist() {
     }
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <h1 className="text-2xl font-semibold text-gray-900">Your Watchlist</h1>
+        <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto bg-[#E3EDF7] rounded-[3rem] shadow-neu-flat p-8 sm:p-12 min-h-[80vh]">
+                <h1 className="text-3xl font-extrabold text-gray-700 drop-shadow-sm mb-8 px-2">Your Watchlist</h1>
 
-            {loading ? (
-                <div className="flex justify-center py-12">
-                    <Loader2 className="h-8 w-8 text-blue-600 animate-spin" />
-                </div>
-            ) : (
-                <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {watchlist.length === 0 ? (
-                        <p className="text-gray-500 text-center col-span-full py-8">No players in your watchlist yet.</p>
-                    ) : (
-                        watchlist.map((player) => (
-                            <div key={player.watchlist_id} className="bg-white overflow-hidden shadow rounded-lg flex items-center p-6 space-x-4 border border-gray-100 hover:shadow-md transition-shadow">
-                                <img className="h-12 w-12 rounded-full bg-gray-100 object-cover" src={player.avatar_url || `https://ui-avatars.com/api/?name=${player.full_name}&background=random`} alt="" />
-                                <div className="flex-1 min-w-0">
-                                    <Link to={`/player/${player.id}`} className="text-sm font-medium text-gray-900 truncate hover:text-blue-600 hover:underline">{player.full_name}</Link>
-                                    <p className="text-sm text-gray-500 truncate">{player.team_name} • {player.playing_role}</p>
+                {loading ? (
+                    <div className="flex justify-center py-12">
+                        <Loader2 className="h-8 w-8 text-blue-600 animate-spin" />
+                    </div>
+                ) : (
+                    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {watchlist.length === 0 ? (
+                            <p className="text-gray-500 text-center col-span-full py-20 text-lg font-medium">No players in your watchlist yet.</p>
+                        ) : (
+                            watchlist.map((player) => (
+                                <div key={player.watchlist_id} className="bg-[#E3EDF7] shadow-neu-flat rounded-lg flex items-center p-6 space-x-4 border-none hover:shadow-neu-pressed transition-all duration-300">
+                                    <img className="h-12 w-12 rounded-full bg-[#E3EDF7] object-cover shadow-neu-flat border-2 border-[#E3EDF7]" src={player.avatar_url || `https://ui-avatars.com/api/?name=${player.full_name}&background=random`} alt="" />
+                                    <div className="flex-1 min-w-0">
+                                        <Link to={`/player/${player.id}`} className="text-sm font-bold text-gray-700 truncate hover:text-blue-600 hover:underline">{player.full_name}</Link>
+                                        <p className="text-xs text-gray-500 truncate font-medium">{player.team_name} • {player.playing_role}</p>
+                                    </div>
+                                    <button
+                                        onClick={() => handleRemove(player.watchlist_id)}
+                                        className="inline-flex items-center p-2 rounded-full shadow-neu-button text-red-500 hover:text-red-700 hover:shadow-neu-pressed focus:outline-none transition-all active:scale-95"
+                                        title="Remove from watchlist"
+                                    >
+                                        <Trash2 className="h-4 w-4" />
+                                    </button>
                                 </div>
-                                <button
-                                    onClick={() => handleRemove(player.watchlist_id)}
-                                    className="inline-flex items-center p-1.5 border border-transparent rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
-                                    title="Remove from watchlist"
-                                >
-                                    <Trash2 className="h-4 w-4" />
-                                </button>
-                            </div>
-                        ))
-                    )}
-                </div>
-            )}
+                            ))
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

@@ -148,7 +148,7 @@ export default function Stats() {
             </div>
 
             {/* Filters */}
-            <div className="mt-8 bg-white p-6 rounded-xl shadow-sm border border-gray-200 space-y-6">
+            <div className="mt-8 bg-[#E3EDF7] p-6 rounded-2xl shadow-neu-flat space-y-6">
 
                 {/* Search Bar */}
                 <div className="relative">
@@ -158,7 +158,7 @@ export default function Stats() {
                     <input
                         type="text"
                         placeholder="Search players by name..."
-                        className="pl-10 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-base py-3 border"
+                        className="pl-10 block w-full rounded-xl border-none bg-[#E3EDF7] shadow-neu-pressed focus:ring-0 focus:outline-none sm:text-sm py-3 text-gray-700 placeholder-gray-400 transition-shadow"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -169,11 +169,11 @@ export default function Stats() {
 
                     {/* Batting Hand */}
                     <div>
-                        <label className="block text-xs font-medium text-gray-700 uppercase tracking-wide mb-1">Batting Hand</label>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Batting Hand</label>
                         <select
                             value={battingHand}
                             onChange={(e) => setBattingHand(e.target.value)}
-                            className="block w-full rounded-lg border-gray-300 py-2.5 px-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 border bg-white"
+                            className="block w-full rounded-xl border-none bg-[#E3EDF7] p-3 text-sm shadow-neu-pressed focus:ring-0 focus:outline-none text-gray-700 cursor-pointer"
                         >
                             <option value="All">All Batting Styles</option>
                             <option value="Right-hand">Right-hand</option>
@@ -183,11 +183,11 @@ export default function Stats() {
 
                     {/* Bowling Hand */}
                     <div>
-                        <label className="block text-xs font-medium text-gray-700 uppercase tracking-wide mb-1">Bowling Hand</label>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Bowling Hand</label>
                         <select
                             value={bowlingHand}
                             onChange={(e) => setBowlingHand(e.target.value)}
-                            className="block w-full rounded-lg border-gray-300 py-2.5 px-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 border bg-white"
+                            className="block w-full rounded-xl border-none bg-[#E3EDF7] p-3 text-sm shadow-neu-pressed focus:ring-0 focus:outline-none text-gray-700 cursor-pointer"
                         >
                             <option value="All">All Bowling Arms</option>
                             <option value="Right-arm">Right-arm</option>
@@ -197,11 +197,11 @@ export default function Stats() {
 
                     {/* Bowling Style */}
                     <div>
-                        <label className="block text-xs font-medium text-gray-700 uppercase tracking-wide mb-1">Bowling Style</label>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Bowling Style</label>
                         <select
                             value={bowlingStyle}
                             onChange={(e) => setBowlingStyle(e.target.value)}
-                            className="block w-full rounded-lg border-gray-300 py-2.5 px-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 border bg-white"
+                            className="block w-full rounded-xl border-none bg-[#E3EDF7] p-3 text-sm shadow-neu-pressed focus:ring-0 focus:outline-none text-gray-700 cursor-pointer"
                         >
                             <option value="All">All Bowling Types</option>
                             <option value="Pace">Pace</option>
@@ -210,68 +210,69 @@ export default function Stats() {
                     </div>
 
                     {/* Wicketkeeper Checkbox */}
-                    <div className="flex items-end pb-2">
-                        <label className="inline-flex items-center cursor-pointer group">
+                    <div>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2 opacity-0 select-none">Role</label>
+                        <label className="flex items-center justify-center w-full rounded-xl border-none bg-[#E3EDF7] p-3 text-sm shadow-neu-pressed cursor-pointer hover:text-blue-600 transition-colors">
                             <input
                                 type="checkbox"
-                                className="h-5 w-5 accent-blue-600 border-gray-300 rounded focus:ring-blue-500 transition duration-150 ease-in-out cursor-pointer"
+                                className="h-4 w-4 accent-blue-600 border-gray-300 rounded focus:ring-blue-500 cursor-pointer mr-2"
                                 checked={isWicketKeeper === 'Yes'}
                                 onChange={(e) => setIsWicketKeeper(e.target.checked ? 'Yes' : 'All')}
                             />
-                            <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">Is Wicketkeeper</span>
+                            <span className="font-bold text-gray-600">Is Wicketkeeper</span>
                         </label>
                     </div>
                 </div>
 
                 {/* Advanced Range Filters */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t pt-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 border-t border-gray-200/50 pt-6">
                     <div>
-                        <label className="block text-xs font-medium text-gray-700">Min Stats Range</label>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Min Stats Range</label>
                         <div className="mt-1 flex gap-2">
                             <input
                                 type="number"
                                 placeholder="Min Matches"
-                                className="block w-full rounded-md border-gray-300 text-sm border p-1"
+                                className="block w-full rounded-xl border-none bg-[#E3EDF7] shadow-neu-pressed p-3 text-sm text-gray-700 placeholder-gray-400 focus:ring-0 focus:outline-none"
                                 onChange={(e) => setFilters(prev => ({ ...prev, minMatches: Number(e.target.value) }))}
                             />
                             <input
                                 type="number"
                                 placeholder="Min Runs"
-                                className="block w-full rounded-md border-gray-300 text-sm border p-1"
+                                className="block w-full rounded-xl border-none bg-[#E3EDF7] shadow-neu-pressed p-3 text-sm text-gray-700 placeholder-gray-400 focus:ring-0 focus:outline-none"
                                 onChange={(e) => setFilters(prev => ({ ...prev, minRuns: Number(e.target.value) }))}
                             />
                             <input
                                 type="number"
                                 placeholder="Min Wickets"
-                                className="block w-full rounded-md border-gray-300 text-sm border p-1"
+                                className="block w-full rounded-xl border-none bg-[#E3EDF7] shadow-neu-pressed p-3 text-sm text-gray-700 placeholder-gray-400 focus:ring-0 focus:outline-none"
                                 onChange={(e) => setFilters(prev => ({ ...prev, minWickets: Number(e.target.value) }))}
                             />
                         </div>
                     </div>
                     <div>
-                        <label className="block text-xs font-medium text-gray-700">Batting Criteria</label>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Batting Criteria</label>
                         <div className="mt-1 flex gap-2">
                             <input
                                 type="number"
                                 placeholder="Min Avg"
-                                className="block w-full rounded-md border-gray-300 text-sm border p-1"
+                                className="block w-full rounded-xl border-none bg-[#E3EDF7] shadow-neu-pressed p-3 text-sm text-gray-700 placeholder-gray-400 focus:ring-0 focus:outline-none"
                                 onChange={(e) => setFilters(prev => ({ ...prev, minAvg: Number(e.target.value) }))}
                             />
                             <input
                                 type="number"
                                 placeholder="Min SR"
-                                className="block w-full rounded-md border-gray-300 text-sm border p-1"
+                                className="block w-full rounded-xl border-none bg-[#E3EDF7] shadow-neu-pressed p-3 text-sm text-gray-700 placeholder-gray-400 focus:ring-0 focus:outline-none"
                                 onChange={(e) => setFilters(prev => ({ ...prev, minSR: Number(e.target.value) }))}
                             />
                         </div>
                     </div>
                     <div>
-                        <label className="block text-xs font-medium text-gray-700">Bowling Criteria</label>
+                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Bowling Criteria</label>
                         <div className="mt-1 flex gap-2">
                             <input
                                 type="number"
                                 placeholder="Max Econ"
-                                className="block w-full rounded-md border-gray-300 text-sm border p-1"
+                                className="block w-full rounded-xl border-none bg-[#E3EDF7] shadow-neu-pressed p-3 text-sm text-gray-700 placeholder-gray-400 focus:ring-0 focus:outline-none"
                                 onChange={(e) => setFilters(prev => ({ ...prev, maxEcon: Number(e.target.value) || 100 }))}
                             />
                         </div>
@@ -288,9 +289,9 @@ export default function Stats() {
                 ) : (
                     <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-                                <table className="min-w-full divide-y divide-gray-300">
-                                    <thead className="bg-gray-50">
+                            <div className="overflow-hidden shadow-neu-flat rounded-2xl bg-[#E3EDF7]">
+                                <table className="min-w-full divide-y divide-gray-200/50">
+                                    <thead className="bg-[#E3EDF7]">
                                         <tr>
                                             <th scope="col" className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Player</th>
                                             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Role</th>
@@ -344,7 +345,7 @@ export default function Stats() {
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-gray-200 bg-white">
+                                    <tbody className="divide-y divide-gray-200/50 bg-[#E3EDF7] text-gray-700">
                                         {processedPlayers.length > 0 ? (
                                             processedPlayers.map((player) => (
                                                 <tr key={player.player_id}>

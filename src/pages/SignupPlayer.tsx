@@ -104,24 +104,24 @@ export default function SignupPlayer() {
 
     if (generatedId) {
         return (
-            <div className="flex bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 justify-center min-h-[calc(100vh-4rem)] items-center">
-                <div className="max-w-md w-full text-center space-y-6 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-                    <div className="rounded-full bg-green-100 p-3 mx-auto w-fit">
-                        <CheckCircle className="h-10 w-10 text-green-600" />
+            <div className="flex bg-[#E3EDF7] py-12 px-4 sm:px-6 lg:px-8 justify-center min-h-[calc(100vh-4rem)] items-center">
+                <div className="max-w-md w-full text-center space-y-6 bg-[#E3EDF7] p-8 rounded-2xl shadow-neu-flat">
+                    <div className="rounded-full bg-[#E3EDF7] p-4 mx-auto w-fit shadow-neu-button">
+                        <CheckCircle className="h-10 w-10 text-green-600 drop-shadow-sm" />
                     </div>
                     <div className="space-y-2">
-                        <h2 className="text-3xl font-extrabold text-gray-900">Welcome to CricTrac!</h2>
+                        <h2 className="text-3xl font-extrabold text-gray-700">Welcome to CricTrac!</h2>
                         <p className="text-gray-500">Your player profile has been created.</p>
                     </div>
 
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                        <p className="text-sm text-blue-600 font-medium uppercase tracking-wide">Your Unique Player ID</p>
-                        <p className="text-4xl font-mono font-bold text-blue-900 mt-2 tracking-wider select-all">{generatedId}</p>
-                        <p className="text-xs text-blue-500 mt-2">Please save this ID. You will need it for official matches.</p>
+                    <div className="bg-[#E3EDF7] rounded-xl p-6 shadow-neu-pressed">
+                        <p className="text-xs text-blue-600 font-bold uppercase tracking-wide">Your Unique Player ID</p>
+                        <p className="text-4xl font-mono font-bold text-gray-700 mt-2 tracking-wider select-all drop-shadow-sm">{generatedId}</p>
+                        <p className="text-xs text-gray-500 mt-2">Please save this ID. You will need it for official matches.</p>
                     </div>
 
                     <div className="pt-4">
-                        <Link to="/login" className="block w-full text-center px-4 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                        <Link to="/login" className="block w-full text-center px-4 py-3 border-none text-sm font-bold rounded-xl text-blue-600 bg-[#E3EDF7] shadow-neu-button hover:shadow-neu-pressed hover:text-blue-700 transition-all active:scale-95">
                             Continue to Login
                         </Link>
                     </div>
@@ -131,29 +131,29 @@ export default function SignupPlayer() {
     }
 
     return (
-        <div className="flex bg-gray-50 py-12 px-4 sm:px-6 lg:px-8 justify-center min-h-[calc(100vh-4rem)]">
+        <div className="flex bg-[#E3EDF7] py-12 px-4 sm:px-6 lg:px-8 justify-center min-h-[calc(100vh-4rem)]">
             <div className="max-w-md w-full space-y-8">
                 <div>
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-700 drop-shadow-sm">
                         Player Registration
                     </h2>
-                    <p className="mt-2 text-center text-sm text-gray-600">
+                    <p className="mt-2 text-center text-sm text-gray-500">
                         Create your official player profile and get your CricID
                     </p>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSignup}>
-                    <div className="rounded-md shadow-sm space-y-4">
+                    <div className="rounded-md space-y-4">
 
                         {/* 1. Full Name */}
                         <div className="relative">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <label className="block text-sm font-bold text-gray-600 mb-1 ml-1">Full Name</label>
                             <div className="relative">
                                 <input
                                     id="fullName"
                                     name="fullName"
                                     type="text"
                                     required
-                                    className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base"
+                                    className="appearance-none block w-full pl-10 pr-3 py-3 border-none bg-[#E3EDF7] shadow-neu-pressed rounded-xl placeholder-gray-400 focus:outline-none text-gray-700 text-base transition-shadow"
                                     placeholder="As per ID proof"
                                     value={formData.fullName}
                                     onChange={handleChange}
@@ -164,14 +164,14 @@ export default function SignupPlayer() {
 
                         {/* 2. DOB */}
                         <div className="relative">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                            <label className="block text-sm font-bold text-gray-600 mb-1 ml-1">Date of Birth</label>
                             <div className="relative">
                                 <input
                                     id="dob"
                                     name="dob"
                                     type="date"
                                     required
-                                    className="appearance-none block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-base"
+                                    className="appearance-none block w-full pl-10 pr-3 py-3 border-none bg-[#E3EDF7] shadow-neu-pressed rounded-xl placeholder-gray-400 focus:outline-none text-gray-700 text-base"
                                     value={formData.dob}
                                     onChange={handleChange}
                                 />
@@ -180,18 +180,18 @@ export default function SignupPlayer() {
                         </div>
 
                         {/* 3. Role Selection Section */}
-                        <div className="bg-gray-50 p-6 rounded-xl border border-gray-200 space-y-6">
-                            <div className="flex items-center gap-2 mb-2">
-                                <Activity className="h-6 w-6 text-blue-600" />
-                                <h3 className="text-base font-bold text-gray-900">Cricketing Role</h3>
+                        <div className="bg-[#E3EDF7] p-6 rounded-2xl shadow-neu-flat space-y-6 mt-6">
+                            <div className="flex items-center gap-2 mb-2 px-1">
+                                <Activity className="h-6 w-6 text-blue-600 drop-shadow-sm" />
+                                <h3 className="text-base font-bold text-gray-700">Cricketing Role</h3>
                             </div>
 
                             {/* Batting Hand */}
                             <div>
-                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">Batting Hand</label>
+                                <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3 ml-1">Batting Hand</label>
                                 <div className="flex space-x-4">
                                     {['Right-hand', 'Left-hand'].map((hand) => (
-                                        <label key={hand} className={`flex-1 cursor-pointer border rounded-lg p-3 text-center text-base font-medium transition-all shadow-sm ${battingHand === hand ? 'bg-blue-600 text-white border-blue-600 ring-2 ring-blue-300' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50 hover:border-gray-400'}`}>
+                                        <label key={hand} className={`flex-1 cursor-pointer rounded-xl p-3 text-center text-sm font-bold transition-all ${battingHand === hand ? 'bg-[#E3EDF7] shadow-neu-pressed text-blue-600' : 'bg-[#E3EDF7] shadow-neu-button text-gray-500 hover:text-gray-700'}`}>
                                             <input
                                                 type="radio"
                                                 name="battingHand"
@@ -208,10 +208,10 @@ export default function SignupPlayer() {
 
                             {/* Bowling/Secondary Skill Type */}
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide mb-3">Bowling / Secondary Skill</label>
+                                <label className="block text-sm font-bold text-gray-600 uppercase tracking-wide mb-3 ml-1">Bowling / Secondary Skill</label>
                                 <div className="relative">
                                     <select
-                                        className="appearance-none block w-full bg-white border border-gray-300 rounded-lg py-3 px-4 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base transition-shadow duration-200 cursor-pointer"
+                                        className="appearance-none block w-full bg-[#E3EDF7] border-none shadow-neu-pressed rounded-xl py-3 px-4 pr-10 focus:outline-none text-gray-700 text-base transition-shadow duration-200 cursor-pointer"
                                         value={bowlingType}
                                         onChange={(e) => {
                                             setBowlingType(e.target.value);
@@ -236,10 +236,10 @@ export default function SignupPlayer() {
                             {/* Conditional Bowling Style */}
                             {bowlingType === 'Pace' && (
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide mb-3">Pace Style</label>
+                                    <label className="block text-sm font-bold text-gray-600 uppercase tracking-wide mb-3 ml-1">Pace Style</label>
                                     <div className="relative">
                                         <select
-                                            className="appearance-none block w-full bg-white border border-gray-300 rounded-lg py-3 px-4 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base transition-shadow duration-200 cursor-pointer"
+                                            className="appearance-none block w-full bg-[#E3EDF7] border-none shadow-neu-pressed rounded-xl py-3 px-4 pr-10 focus:outline-none text-gray-700 text-base transition-shadow duration-200 cursor-pointer"
                                             value={bowlingStyle}
                                             onChange={(e) => setBowlingStyle(e.target.value)}
                                         >
@@ -257,10 +257,10 @@ export default function SignupPlayer() {
 
                             {bowlingType === 'Spin' && (
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 uppercase tracking-wide mb-3">Spin Style</label>
+                                    <label className="block text-sm font-bold text-gray-600 uppercase tracking-wide mb-3 ml-1">Spin Style</label>
                                     <div className="relative">
                                         <select
-                                            className="appearance-none block w-full bg-white border border-gray-300 rounded-lg py-3 px-4 pr-10 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base transition-shadow duration-200 cursor-pointer"
+                                            className="appearance-none block w-full bg-[#E3EDF7] border-none shadow-neu-pressed rounded-xl py-3 px-4 pr-10 focus:outline-none text-gray-700 text-base transition-shadow duration-200 cursor-pointer"
                                             value={bowlingStyle}
                                             onChange={(e) => setBowlingStyle(e.target.value)}
                                         >
@@ -286,7 +286,7 @@ export default function SignupPlayer() {
 
                         {/* Email */}
                         <div className="relative">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                            <label className="block text-sm font-bold text-gray-600 mb-1 ml-1">Email Address</label>
                             <div className="relative">
                                 <input
                                     id="email-address"
@@ -294,18 +294,18 @@ export default function SignupPlayer() {
                                     type="email"
                                     autoComplete="email"
                                     required
-                                    className="appearance-none block w-full px-10 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                    className="appearance-none block w-full px-10 py-3 border-none bg-[#E3EDF7] shadow-neu-pressed rounded-xl placeholder-gray-400 focus:outline-none text-gray-700 sm:text-sm"
                                     placeholder="you@example.com"
                                     value={formData.email}
                                     onChange={handleChange}
                                 />
-                                <Mail className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 z-10" />
+                                <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 z-10" />
                             </div>
                         </div>
 
                         {/* Password */}
                         <div className="relative">
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <label className="block text-sm font-bold text-gray-600 mb-1 ml-1">Password</label>
                             <div className="relative">
                                 <input
                                     id="password"
@@ -313,12 +313,12 @@ export default function SignupPlayer() {
                                     type="password"
                                     autoComplete="new-password"
                                     required
-                                    className="appearance-none block w-full px-10 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                    className="appearance-none block w-full px-10 py-3 border-none bg-[#E3EDF7] shadow-neu-pressed rounded-xl placeholder-gray-400 focus:outline-none text-gray-700 sm:text-sm"
                                     placeholder="Min 6 characters"
                                     value={formData.password}
                                     onChange={handleChange}
                                 />
-                                <Lock className="absolute left-3 top-2.5 h-5 w-5 text-gray-400 z-10" />
+                                <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 z-10" />
                             </div>
                         </div>
                     </div>
@@ -331,12 +331,12 @@ export default function SignupPlayer() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="group relative w-full flex justify-center py-2.5 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition-colors shadow-sm"
+                            className="group relative w-full flex justify-center py-3 px-4 border-none text-sm font-bold rounded-xl text-blue-600 bg-[#E3EDF7] shadow-neu-button hover:shadow-neu-pressed hover:text-blue-700 focus:outline-none disabled:opacity-50 transition-all active:scale-95"
                         >
                             {loading ? <Loader2 className="animate-spin h-5 w-5" /> : (
                                 <>
                                     <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                                        <CheckCircle className="h-5 w-5 text-blue-500 group-hover:text-blue-400" aria-hidden="true" />
+                                        <CheckCircle className="h-5 w-5 text-blue-600 group-hover:text-blue-700" aria-hidden="true" />
                                     </span>
                                     Register Player & Generate ID
                                 </>
