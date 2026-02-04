@@ -89,6 +89,22 @@ export default function Home() {
                                 <span className="text-4xl font-extrabold text-gray-900 mb-1">{counts.matches}+</span>
                                 <span className="text-gray-600 font-medium tracking-wide">Matches Tracked</span>
                             </div>
+
+                            {/* Player Signup CTA */}
+                            <div className="sm:col-span-2 bg-gradient-to-r from-blue-600 to-indigo-700 p-8 rounded-2xl shadow-xl border border-transparent flex flex-col items-center transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl text-center group relative overflow-hidden">
+                                <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-white opacity-10 rounded-full blur-xl"></div>
+                                <div className="absolute bottom-0 left-0 -mb-4 -ml-4 w-24 h-24 bg-white opacity-10 rounded-full blur-xl"></div>
+
+                                <h3 className="text-2xl font-bold text-white mb-2 relative z-10">Are you a Player?</h3>
+                                <p className="text-blue-100 mb-6 relative z-10 max-w-xs mx-auto">Create your official digital profile and get your unique CricID today.</p>
+
+                                <button
+                                    onClick={() => navigate('/signup-player')}
+                                    className="px-6 py-3 bg-white text-blue-700 font-bold rounded-lg shadow-md hover:bg-blue-50 transition-colors relative z-10 w-full sm:w-auto"
+                                >
+                                    Register as Player
+                                </button>
+                            </div>
                         </div>
                     </div>
 

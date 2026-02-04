@@ -5,7 +5,7 @@ import { supabase } from '../lib/supabase';
 import { UserPlus, Search, Loader2, ArrowUpDown } from 'lucide-react';
 import type { PlayerStatsSummary } from '../lib/types';
 
-type SortField = 'batting_avg' | 'batting_strike_rate' | 'total_runs' | 'total_wickets' | 'bowling_economy_rate';
+type SortField = 'matches_played' | 'batting_avg' | 'batting_strike_rate' | 'total_runs' | 'total_wickets' | 'bowling_economy_rate';
 
 export default function Stats() {
     const [searchParams] = useSearchParams();
@@ -15,12 +15,17 @@ export default function Stats() {
     const [loading, setLoading] = useState(true);
 
     // Filters & Sorting
-    const [roleFilter, setRoleFilter] = useState('All');
+    const [battingHand, setBattingHand] = useState('All');
+    const [bowlingHand, setBowlingHand] = useState('All');
+    const [bowlingStyle, setBowlingStyle] = useState('All');
+    const [isWicketKeeper, setIsWicketKeeper] = useState('All');
+
     const [sortField, setSortField] = useState<SortField>('total_runs');
     const [sortAsc, setSortAsc] = useState(false);
 
     // Numeric Filters
     const [filters, setFilters] = useState({
+        minMatches: 0,
         minRuns: 0,
         minWickets: 0,
         minAvg: 0,
@@ -65,16 +70,43 @@ export default function Stats() {
     const processedPlayers = players
         .filter(player => {
             const matchName = player.full_name.toLowerCase().includes(searchQuery.toLowerCase());
-            const matchRole = roleFilter === 'All' || player.playing_role === roleFilter;
+
+            // Detailed Role Parsing
+            const role = player.playing_role || '';
+
+            // 1. Batting Hand
+            const matchBattingHand = battingHand === 'All' || role.includes(battingHand);
+
+            // 2. Bowling Hand
+            const matchBowlingHand = bowlingHand === 'All' || role.includes(bowlingHand);
+
+            // 3. Bowling Style
+            // Pace matches "Pace"
+            // Spin matches "Spin", "Orthodox", "Unorthodox"
+            let matchBowlingStyle = true;
+            if (bowlingStyle === 'Pace') {
+                matchBowlingStyle = role.includes('Pace');
+            } else if (bowlingStyle === 'Spin') {
+                matchBowlingStyle = role.includes('Spin') || role.includes('Orthodox') || role.includes('Unorthodox');
+            }
+
+            // 4. Wicketkeeper
+            let matchWicketKeeper = true;
+            if (isWicketKeeper === 'Yes') {
+                matchWicketKeeper = role.includes('Wicketkeeper');
+            } else if (isWicketKeeper === 'No') {
+                matchWicketKeeper = !role.includes('Wicketkeeper');
+            }
 
             // Numeric Checks
+            const matchMatches = (player.matches_played || 0) >= filters.minMatches;
             const matchRuns = (player.total_runs || 0) >= filters.minRuns;
             const matchWickets = (player.total_wickets || 0) >= filters.minWickets;
             const matchAvg = (player.batting_avg || 0) >= filters.minAvg;
             const matchSR = (player.batting_strike_rate || 0) >= filters.minSR;
             const matchEcon = (player.bowling_economy_rate || 0) <= filters.maxEcon;
 
-            return matchName && matchRole && matchRuns && matchWickets && matchAvg && matchSR && matchEcon;
+            return matchName && matchBattingHand && matchBowlingHand && matchBowlingStyle && matchWicketKeeper && matchMatches && matchRuns && matchWickets && matchAvg && matchSR && matchEcon;
         })
         .sort((a, b) => {
             const valA = (a[sortField] || 0) as number;
@@ -116,37 +148,78 @@ export default function Stats() {
             </div>
 
             {/* Filters */}
-            <div className="mt-8 bg-white p-4 rounded-lg shadow-sm border border-gray-200 space-y-4">
-                <div className="flex flex-col sm:flex-row gap-4 justify-between items-center">
-                    <div className="relative w-full sm:w-64">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <Search className="h-5 w-5 text-gray-400" />
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="Search players..."
-                            className="pl-10 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm py-2 border"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
+            <div className="mt-8 bg-white p-6 rounded-xl shadow-sm border border-gray-200 space-y-6">
+
+                {/* Search Bar */}
+                <div className="relative">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <Search className="h-5 w-5 text-gray-400" />
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Search players by name..."
+                        className="pl-10 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-base py-3 border"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </div>
+
+                {/* Role Filters Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                    {/* Batting Hand */}
+                    <div>
+                        <label className="block text-xs font-medium text-gray-700 uppercase tracking-wide mb-1">Batting Hand</label>
+                        <select
+                            value={battingHand}
+                            onChange={(e) => setBattingHand(e.target.value)}
+                            className="block w-full rounded-lg border-gray-300 py-2.5 px-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 border bg-white"
+                        >
+                            <option value="All">All Batting Styles</option>
+                            <option value="Right-hand">Right-hand</option>
+                            <option value="Left-hand">Left-hand</option>
+                        </select>
                     </div>
 
-                    <div className="flex gap-4 w-full sm:w-auto">
+                    {/* Bowling Hand */}
+                    <div>
+                        <label className="block text-xs font-medium text-gray-700 uppercase tracking-wide mb-1">Bowling Hand</label>
                         <select
-                            value={roleFilter}
-                            onChange={(e) => setRoleFilter(e.target.value)}
-                            className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm border min-w-[200px]"
+                            value={bowlingHand}
+                            onChange={(e) => setBowlingHand(e.target.value)}
+                            className="block w-full rounded-lg border-gray-300 py-2.5 px-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 border bg-white"
                         >
-                            <option value="All">All Roles</option>
-                            <option value="Top-order Batter">Top-order Batsman</option>
-                            <option value="Opening Batter">Opening Batsman</option>
-                            <option value="Middle-order Batter">Middle-order Batsman</option>
-                            <option value="Wicketkeeper Batter">Wicketkeeper Batsman</option>
-                            <option value="All Rounder">All Rounder</option>
-                            <option value="Bowling Allrounder">Bowling Allrounder</option>
-                            <option value="Batting Allrounder">Batting Allrounder</option>
-                            <option value="Bowler">Bowler</option>
+                            <option value="All">All Bowling Arms</option>
+                            <option value="Right-arm">Right-arm</option>
+                            <option value="Left-arm">Left-arm</option>
                         </select>
+                    </div>
+
+                    {/* Bowling Style */}
+                    <div>
+                        <label className="block text-xs font-medium text-gray-700 uppercase tracking-wide mb-1">Bowling Style</label>
+                        <select
+                            value={bowlingStyle}
+                            onChange={(e) => setBowlingStyle(e.target.value)}
+                            className="block w-full rounded-lg border-gray-300 py-2.5 px-3 text-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 border bg-white"
+                        >
+                            <option value="All">All Bowling Types</option>
+                            <option value="Pace">Pace</option>
+                            <option value="Spin">Spin</option>
+                        </select>
+                    </div>
+
+                    {/* Wicketkeeper Checkbox */}
+                    <div className="flex items-end pb-2">
+                        <label className="inline-flex items-center cursor-pointer group">
+                            <input
+                                type="checkbox"
+                                className="h-5 w-5 accent-blue-600 border-gray-300 rounded focus:ring-blue-500 transition duration-150 ease-in-out cursor-pointer"
+                                checked={isWicketKeeper === 'Yes'}
+                                onChange={(e) => setIsWicketKeeper(e.target.checked ? 'Yes' : 'All')}
+                            />
+                            <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-blue-600 transition-colors">Is Wicketkeeper</span>
+                        </label>
                     </div>
                 </div>
 
@@ -155,6 +228,12 @@ export default function Stats() {
                     <div>
                         <label className="block text-xs font-medium text-gray-700">Min Stats Range</label>
                         <div className="mt-1 flex gap-2">
+                            <input
+                                type="number"
+                                placeholder="Min Matches"
+                                className="block w-full rounded-md border-gray-300 text-sm border p-1"
+                                onChange={(e) => setFilters(prev => ({ ...prev, minMatches: Number(e.target.value) }))}
+                            />
                             <input
                                 type="number"
                                 placeholder="Min Runs"
@@ -220,6 +299,13 @@ export default function Stats() {
                                             <th
                                                 scope="col"
                                                 className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-100 group"
+                                                onClick={() => handleSort('matches_played')}
+                                            >
+                                                <div className="flex items-center">Mat <ArrowUpDown className="h-4 w-4 ml-1 text-gray-400 group-hover:text-gray-600" /></div>
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 cursor-pointer hover:bg-gray-100 group"
                                                 onClick={() => handleSort('total_runs')}
                                             >
                                                 <div className="flex items-center">Runs <ArrowUpDown className="h-4 w-4 ml-1 text-gray-400 group-hover:text-gray-600" /></div>
@@ -274,6 +360,7 @@ export default function Stats() {
                                                         </div>
                                                     </td>
                                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{(player.playing_role || '-').replace(/Batter/g, 'Batsman')}</td>
+                                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900 font-medium">{player.matches_played}</td>
                                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900 font-medium">{player.total_runs}</td>
                                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{Number(player.batting_avg || 0).toFixed(2)}</td>
                                                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{Number(player.batting_strike_rate || 0).toFixed(2)}</td>

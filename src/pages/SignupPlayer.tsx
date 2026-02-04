@@ -75,17 +75,21 @@ export default function SignupPlayer() {
             const uniqueId = `CT-${Math.floor(100000 + Math.random() * 900000)}`;
 
             // 3. Insert into Profiles table
-            const { error: profileError } = await supabase.from('profiles').insert([
-                {
-                    id: authData.user.id,
-                    cric_id: uniqueId,
-                    full_name: formData.fullName,
-                    date_of_birth: formData.dob,
-                    role: 'player',
-                    playing_role: finalRoleString,
-                    is_verified: false
-                }
-            ]);
+            // 3. Upsert into Profiles table (safe handling for existing profiles)
+            const { error: profileError } = await supabase
+                .from('profiles')
+                .upsert([
+                    {
+                        id: authData.user.id,
+                        cric_id: uniqueId,
+                        full_name: formData.fullName,
+                        date_of_birth: formData.dob,
+                        role: 'player',
+                        playing_role: finalRoleString,
+                        is_verified: false
+                    }
+                ], { onConflict: 'id' })
+                .select();
 
             if (profileError) {
                 console.error("Profile creation failed:", profileError);
