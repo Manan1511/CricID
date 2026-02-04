@@ -14,24 +14,24 @@ export default function About() {
                 </div>
 
                 <div className="mt-16">
-                    <div className="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
-                        <div className="p-6 bg-slate-50 rounded-xl">
-                            <h3 className="text-lg font-medium text-gray-900">The Problem</h3>
-                            <p className="mt-2 text-base text-gray-500">
+                    <div className="space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-8">
+                        <div className="p-8 bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-lg border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-xl">
+                            <h3 className="text-xl font-bold text-gray-900 mb-4">The Problem</h3>
+                            <p className="text-base text-gray-600 leading-relaxed">
                                 Age fraud and identity duplication are rampant in grassroots cricket, making it difficult for scouts to trust records.
                             </p>
                         </div>
 
-                        <div className="p-6 bg-slate-50 rounded-xl">
-                            <h3 className="text-lg font-medium text-gray-900">Our Solution</h3>
-                            <p className="mt-2 text-base text-gray-500">
-                                A centralized, immutable database of player identities and statistics, verified by local officials and locked on the blockchain (conceptually).
+                        <div className="p-8 bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-lg border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-xl">
+                            <h3 className="text-xl font-bold text-gray-900 mb-4">Our Solution</h3>
+                            <p className="text-base text-gray-600 leading-relaxed">
+                                A centralized, immutable database of player identities and statistics, verified by local officials and locked on the blockchain.
                             </p>
                         </div>
 
-                        <div className="p-6 bg-slate-50 rounded-xl">
-                            <h3 className="text-lg font-medium text-gray-900">How It Works</h3>
-                            <p className="mt-2 text-base text-gray-500">
+                        <div className="p-8 bg-gradient-to-br from-white to-blue-50 rounded-2xl shadow-lg border border-gray-100 transform transition-all duration-300 hover:scale-105 hover:-translate-y-2 hover:shadow-xl">
+                            <h3 className="text-xl font-bold text-gray-900 mb-4">How It Works</h3>
+                            <p className="text-base text-gray-600 leading-relaxed">
                                 Players sign up, get verified by officials, and their match data is automatically tracked and displayed on their public profile.
                             </p>
                         </div>

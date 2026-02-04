@@ -4,9 +4,9 @@ import Navbar from './Navbar';
 
 export default function Layout() {
     return (
-        <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+        <div className="min-h-screen bg-white font-sans text-slate-900 flex flex-col">
             <Navbar />
-            <main>
+            <main className="flex-grow">
                 <Outlet />
             </main>
             <footer className="bg-white border-t border-gray-200 py-8 mt-12">
