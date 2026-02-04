@@ -99,7 +99,7 @@ export default function Stats() {
                 alert("Player already in your watchlist!");
             } else {
                 console.error('Error tracking player:', error);
-                alert("Failed to track player.");
+                alert(`Failed to track player: ${error.message}`);
             }
         } else {
             alert("Player added to watchlist!");

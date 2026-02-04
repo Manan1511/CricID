@@ -1,10 +1,30 @@
 
 import { Link } from 'react-router-dom';
 import { Activity, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 
 export default function Navbar() {
+    const [user, setUser] = useState<any>(null);
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        // Check active session
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setUser(session?.user ?? null);
+        });
+
+        // Listen for auth changes
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null);
+        });
+
+        return () => subscription.unsubscribe();
+    }, []);
+
+    const handleLogout = async () => {
+        await supabase.auth.signOut();
+    };
 
     return (
         <nav className="bg-white shadow-sm border-b border-gray-100">
@@ -34,12 +54,26 @@ export default function Navbar() {
                         </div>
                     </div>
                     <div className="hidden sm:ml-6 sm:flex sm:items-center space-x-3">
-                        <Link to="/login" className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                            Login
-                        </Link>
-                        <Link to="/signup" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                            Sign Up
-                        </Link>
+                        {user ? (
+                            <div className="flex items-center gap-4">
+                                <span className="text-sm text-gray-700">Hi, {user.email?.split('@')[0]}</span>
+                                <button
+                                    onClick={handleLogout}
+                                    className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        ) : (
+                            <>
+                                <Link to="/login" className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                    Login
+                                </Link>
+                                <Link to="/signup" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
+                                    Sign Up
+                                </Link>
+                            </>
+                        )}
                     </div>
                     <div className="-mr-2 flex items-center sm:hidden">
                         <button
