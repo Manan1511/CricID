@@ -127,6 +127,12 @@ export default function Signup() {
                             Sign in
                         </Link>
                     </p>
+                    <p className="text-xs text-gray-500 mt-2">
+                        Are you a cricketer?{' '}
+                        <Link to="/signup-player" className="font-medium text-blue-600 hover:text-blue-500">
+                            Register as Player
+                        </Link>
+                    </p>
                 </div>
             </div>
         </div>

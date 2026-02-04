@@ -4,6 +4,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import SignupPlayer from './pages/SignupPlayer';
 import Stats from './pages/Stats';
 import Watchlist from './pages/Watchlist';
 import About from './pages/About';
@@ -16,6 +17,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
+          <Route path="signup-player" element={<SignupPlayer />} />
           <Route path="stats" element={<Stats />} />
           <Route path="watchlist" element={<Watchlist />} />
           <Route path="about" element={<About />} />

@@ -92,11 +92,17 @@ export default function Login() {
                 </form>
 
 
-                <div className="mt-6 text-center">
+                <div className="mt-6 text-center space-y-2">
                     <p className="text-sm text-gray-600">
                         Don't have an account?{' '}
                         <Link to="/signup" className="font-medium text-blue-600 hover:text-blue-500">
                             Sign up
+                        </Link>
+                    </p>
+                    <p className="text-xs text-gray-500">
+                        Are you a cricketer?{' '}
+                        <Link to="/signup-player" className="font-medium text-blue-600 hover:text-blue-500">
+                            Register as Player
                         </Link>
                     </p>
                 </div>
