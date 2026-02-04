@@ -11,14 +11,13 @@ export default function Home() {
 
     useEffect(() => {
         async function fetchCounts() {
-            // fetching counts - assuming tables 'players' and 'matches' exist
-            // If tables don't exist, this might fail silently or return 0
-            const { count: playerCount } = await supabase.from('players').select('*', { count: 'exact', head: true });
+            // fetching counts from real tables
+            const { count: playerCount } = await supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('is_verified', true);
             const { count: matchCount } = await supabase.from('matches').select('*', { count: 'exact', head: true });
 
             setCounts({
-                players: playerCount || 1240, // Fallback/Mock
-                matches: matchCount || 85,    // Fallback/Mock
+                players: playerCount || 0,
+                matches: matchCount || 0,
             });
         }
         fetchCounts();

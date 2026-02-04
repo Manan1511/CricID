@@ -46,17 +46,30 @@ export default function SignupPlayer() {
         }
 
         if (authData.user) {
-            // 2. Generate Unique ID (Simulated server-side logic)
-            // In production, this would be a database trigger or Edge Function
+            // 2. Generate Unique ID
             const uniqueId = `CT-${Math.floor(100000 + Math.random() * 900000)}`;
 
-            // Simulate DB insertion delay
-            setTimeout(() => {
+            // 3. Insert into Profiles table
+            const { error: profileError } = await supabase.from('profiles').insert([
+                {
+                    id: authData.user.id,
+                    cric_id: uniqueId,
+                    full_name: formData.fullName,
+                    date_of_birth: formData.dob,
+                    role: 'player', // Default role per schema, but explicit here
+                    playing_role: formData.role, // Mapping UI 'role' to DB 'playing_role'
+                    is_verified: false
+                }
+            ]);
+
+            if (profileError) {
+                console.error("Profile creation failed:", profileError);
+                setError("Account created but profile setup failed: " + profileError.message);
+                setLoading(false);
+            } else {
                 setGeneratedId(uniqueId);
                 setLoading(false);
-            }, 1000);
-
-            // Ideally: await supabase.from('players').insert({ id: uniqueId, user_id: authData.user.id, ... })
+            }
         }
     };
 

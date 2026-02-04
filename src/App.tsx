@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import SignupPlayer from './pages/SignupPlayer';
+import PlayerProfile from './pages/PlayerProfile';
 import Stats from './pages/Stats';
 import Watchlist from './pages/Watchlist';
 import About from './pages/About';
@@ -18,6 +19,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="signup-player" element={<SignupPlayer />} />
+          <Route path="player/:id" element={<PlayerProfile />} />
           <Route path="stats" element={<Stats />} />
           <Route path="watchlist" element={<Watchlist />} />
           <Route path="about" element={<About />} />
